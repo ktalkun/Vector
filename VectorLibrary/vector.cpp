@@ -34,7 +34,9 @@ Vector::Vector(const Vector& vector)
 /// Move constructor
 /// \param vector to be moved in new vector
 Vector::Vector(Vector&& vector) noexcept
-    : m_size(vector.m_size), m_array(std::move(vector.m_array)) {
+    : m_size(vector.m_size),
+      m_capacity(vector.m_capacity),
+      m_array(std::move(vector.m_array)) {
   vector.m_size = 0;
   vector.m_capacity = 0;
   vector.m_array = std::make_unique<int[]>(0);

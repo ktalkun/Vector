@@ -36,6 +36,7 @@ TEST(MoveConsturctorTest, Positive) {
   ASSERT_EQ(vectorMove[0], 1);
   ASSERT_EQ(vectorMove[1], 2);
   ASSERT_EQ(vectorMove[2], 3);
+  ASSERT_EQ(vectorMove.getCapacity(), 3);
   ASSERT_EQ(vector.getSize(), 0);
   ASSERT_EQ(vector.getCapacity(), 0);
 }
