@@ -3,7 +3,7 @@ project("${PROJECT_NAME}")
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(PROJECT_NAME VectorTest)
+set(PROJECT_NAME_TEST VectorTest)
 
 # Download and unpack googletest at configure time
 configure_file(googletest-download.cmake googletest-download/CMakeLists.txt)
@@ -38,6 +38,11 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif ()
 
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(${PROJECT_NAME} main.cpp vector_test.cpp)
-target_link_libraries(${PROJECT_NAME} gtest_main VectorLibrary)
+add_executable(${PROJECT_NAME_TEST} main.cpp vector_test.cpp)
+target_link_libraries(${PROJECT_NAME_TEST} gtest_main VectorLibrary)
 add_test(NAME example_test COMMAND ${PROJECT_NAME})
+
+add_custom_command(
+        TARGET ${PROJECT_NAME_TEST} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME_LIBRARY}> $<TARGET_FILE_DIR:${PROJECT_NAME_TEST}>
+)
